@@ -40,7 +40,7 @@ AC_DEFUN([gl_CHECK_TYPE_STRUCT_DIRENT_D_INO],
            [gl_cv_struct_dirent_d_ino=no],
            [case "$host_os" in
                            # Guess yes on glibc systems with Linux kernel.
-              linux*-gnu*) gl_cv_struct_dirent_d_ino="guessing yes" ;;
+              linux*-gnu*|linux*-android*) gl_cv_struct_dirent_d_ino="guessing yes" ;;
                            # If we don't know, assume the worst.
               *)           gl_cv_struct_dirent_d_ino="guessing no" ;;
             esac
