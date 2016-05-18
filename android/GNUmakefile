@@ -17,7 +17,7 @@ $(if $(wildcard $(1)),rm -Rf $(wildcard $(1)))
 endef
 
 define out-dir
-$(TOPDIR)/android/out/$(1)
+$(or $(strip $(OUTDIR)),$(TOPDIR)/android/out/$(1))
 endef
 
 define build-dir
