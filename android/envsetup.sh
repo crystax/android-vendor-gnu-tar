@@ -131,6 +131,14 @@ case $ABI in
         ;;
 esac
 
+case $ABI in
+    mips64)
+        SYSROOT_LIBDIR=usr/lib64
+        ;;
+    *)
+        SYSROOT_LIBDIR=usr/lib
+esac
+
 CROSS=$NDK/toolchains/${TCNAME}-${GCC_VERSION}/prebuilt/${HOST_TAG}/bin/${TARGET}
 
 BINDIR=$OUTDIR/bin
@@ -142,7 +150,7 @@ mkdir -p $BINDIR || return 1
 mkdir -p $SYSROOT/ || return 1
 rsync -a --delete $NDK/platforms/android-${APILEVEL}/arch-${ARCH}/ $SYSROOT/ || return 1
 find $SYSROOT/ -name 'libcrystax.*' -delete
-cp -f $NDK/sources/crystax/libs/$ABI/libcrystax.so $SYSROOT/usr/lib/ || return 1
+cp -f $NDK/sources/crystax/libs/$ABI/libcrystax.so $SYSROOT/$SYSROOT_LIBDIR/ || return 1
 
 {
     echo "#!/bin/sh"
